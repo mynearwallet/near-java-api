@@ -42,9 +42,10 @@ public class ContractMethodProxyClient implements ContractMethodProxy {
                                    PrivateKey accountPrivateKey, ObjectNode arguments, BigInteger deposit) throws Throwable {
         if (methodType == ContractMethodType.CALL) {
             List<Action> actions = getActionList(methodName, arguments, deposit);
-            return nearClient.sendTransactionAwait(TransactionService.prepareTransactionForActionList(
-                    nearClient, accountId, contractAccountId, accountPublicKey, accountPrivateKey,
-                    actions));
+            String base64String = TransactionService.prepareTransactionForActionList(
+                    nearClient, accountId, contractAccountId, accountPublicKey, accountPrivateKey, actions
+            );
+            return nearClient.sendTransactionAwait(base64String);
         } else {
             throw new NearException("Method Type not specified or invalid for call");
         }

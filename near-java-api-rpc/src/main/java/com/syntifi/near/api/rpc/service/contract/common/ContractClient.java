@@ -130,6 +130,8 @@ public abstract class ContractClient {
                             arguments.put(parameterName, (Long) arg);
                         } else if (arg instanceof Integer) {
                             arguments.put(parameterName, (Integer) arg);
+                        } else if (arg instanceof Boolean) {
+                            arguments.put(parameterName, (Boolean) arg);
                         } else {
                             throw new NearException("Argument not supported in the ContractClient call");
                         }
